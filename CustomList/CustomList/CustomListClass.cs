@@ -100,6 +100,21 @@ namespace CustomList
             return listStringOutput;
         }
 
+        public static CustomList<T> operator+ (CustomList<T> listOne, CustomList<T> listTwo)
+        {
+            CustomList<T> resultList = new CustomList<T>();
+            for (int i = 0; i < listOne.Count; i++)
+            {
+                resultList.Add(listOne[i]);
+            }
+            for (int i = 0; i < listTwo.Count; i++)
+            {
+                resultList.Add(listTwo[i]);
+            }
+
+            return resultList;
+        }
+
         private void UpdateArrayLength(int length)
         {
             T[] oldVals = new T[Capacity];

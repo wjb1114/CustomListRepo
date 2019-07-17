@@ -313,10 +313,25 @@ namespace CustomList_UnitTesting
             CustomList<int> testTwo = new CustomList<int>(valsTwo);
             CustomList<int> result;
             CustomList<int> expectedResult = new CustomList<int>(expectedVals);
+            bool resultBool = true;
 
             result = testOne + testTwo;
-
-            Assert.AreEqual(expectedResult, result);
+            if (result.Count != expectedResult.Count)
+            {
+                Assert.Fail("CustomList objects are of inequal length.");
+            }
+            else
+            {
+                for (int i = 0; i < result.Count; i++)
+                {
+                    if (result[i] != expectedResult[i])
+                    {
+                        resultBool = false;
+                        break;
+                    }
+                }
+                Assert.IsTrue(resultBool);
+            }
         }
         [TestMethod]
         public void PlusOperator_TwoCustomListsBothWithValues_CountIncrements()
@@ -342,10 +357,26 @@ namespace CustomList_UnitTesting
             CustomList<int> testTwo = new CustomList<int>();
             CustomList<int> result;
             CustomList<int> expectedResult = testOne;
+            bool resultBool = true;
 
             result = testOne + testTwo;
 
-            Assert.AreEqual(expectedResult, result);
+            if (result.Count != expectedResult.Count)
+            {
+                Assert.Fail("CustomList objects are of inequal length.");
+            }
+            else
+            {
+                for (int i = 0; i < result.Count; i++)
+                {
+                    if (result[i] != expectedResult[i])
+                    {
+                        resultBool = false;
+                        break;
+                    }
+                }
+                Assert.IsTrue(resultBool);
+            }
         }
         [TestMethod]
         public void PlusOperator_TwoCustomListsOneWithValues_CountIncrements()
@@ -369,10 +400,26 @@ namespace CustomList_UnitTesting
             CustomList<int> testTwo = new CustomList<int>();
             CustomList<int> result;
             CustomList<int> expectedResult = testOne;
+            bool resultBool = true;
 
             result = testOne + testTwo;
 
-            Assert.AreEqual(expectedResult, result);
+            if (result.Count != expectedResult.Count)
+            {
+                Assert.Fail("CustomList objects are of inequal length.");
+            }
+            else
+            {
+                for (int i = 0; i < result.Count; i++)
+                {
+                    if (result[i] != expectedResult[i])
+                    {
+                        resultBool = false;
+                        break;
+                    }
+                }
+                Assert.IsTrue(resultBool);
+            }
         }
         [TestMethod]
         public void PlusOperator_TwoCustomListsNeitherWithValues_CountIncrements()
