@@ -9,17 +9,10 @@ namespace CustomList
     public class CustomList<T>
     {
         private T[] vals;
-        private int count;
 
-        public int Count
-        {
-            get
-            {
-                return count;
-            }
-        }
+        public int Count { get; private set; }
 
-        private int ArrayLength
+        public int Capacity
         {
             get
             {
@@ -31,7 +24,14 @@ namespace CustomList
         {
             get
             {
-                return vals[indexer];
+                if(indexer >= Count)
+                {
+                    throw new IndexOutOfRangeException("Index out of range.");
+                }
+                else
+                {
+                    return vals[indexer];
+                }
             }
             set
             {
@@ -42,17 +42,17 @@ namespace CustomList
         public CustomList()
         {
             vals = new T[4];
-            count = 0;
+            Count = 0;
         }
 
         public void Add(T item)
         {
-            if (Count >= ArrayLength)
+            if (Count >= Capacity)
             {
-                UpdateArrayLength(ArrayLength * 2);
+                UpdateArrayLength(Capacity * 2);
             }
             vals[Count] = item;
-            count++;
+            Count++;
         }
 
         private void UpdateArrayLength(int length)

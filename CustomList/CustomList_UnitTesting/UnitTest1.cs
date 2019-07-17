@@ -82,7 +82,7 @@ namespace CustomList_UnitTesting
             Assert.AreEqual(expected, actual);
         }
         [TestMethod]
-        public void Add_AddToPopulatedList_CreatedNewArrayWhenOutOfBoundsValueExists()
+        public void Add_AddToPopulatedList_CreatedNewArrayWhenOutOfBoundsValueExists_NewValueExists()
         {
             CustomList<int> test = new CustomList<int>();
             int expected = 8;
@@ -100,6 +100,47 @@ namespace CustomList_UnitTesting
             actual = test[8];
             // assert
             Assert.AreEqual(expected, actual);
+        }
+        [TestMethod]
+        public void Add_AddToPopulatedList_CreatedNewArrayWhenOutOfBoundsValueExists_ArrayLengthUpdated()
+        {
+            CustomList<int> test = new CustomList<int>();
+            int expected = 16;
+            int actual;
+            // act
+            test.Add(0);
+            test.Add(1);
+            test.Add(2);
+            test.Add(3);
+            test.Add(4);
+            test.Add(5);
+            test.Add(6);
+            test.Add(7);
+            test.Add(8);
+            actual = test.Capacity;
+            // assert
+            Assert.AreEqual(expected, actual);
+        }
+        [TestMethod]
+        public void AccessingItemInArray_OutOfBoundsWhenInArrayLengthButNotInList()
+        {
+            CustomList<int> test = new CustomList<int>();
+            int actual;
+
+            test.Add(0);
+            test.Add(1);
+            test.Add(2);
+            test.Add(3);
+            test.Add(4);
+            try
+            {
+                actual = test[5];
+                Assert.Fail("Expected to fail due to value being out of range.");
+            }
+            catch (IndexOutOfRangeException e)
+            {
+                Assert.AreEqual("Index out of range.", e.Message);
+            }
         }
     }
 }
