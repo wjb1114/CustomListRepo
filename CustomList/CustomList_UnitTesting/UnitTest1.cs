@@ -232,15 +232,16 @@ namespace CustomList_UnitTesting
         public void ToString_ArrayHasValues_ReturnsStringWithLengthMoreThanZero()
         {
             CustomList<int> test = new CustomList<int>();
-            int result;
             int minLength = 1;
+            int result;
             string output;
 
             test.Add(0);
 
             output = test.ToString();
+            result = output.Length;
 
-            Assert.IsTrue(output.Length >= minLength);
+            Assert.IsTrue(result >= minLength);
         }
         [TestMethod]
         public void ToString_ArrayHasNoValues_ReturnsStringWithLengthZero()
@@ -251,8 +252,9 @@ namespace CustomList_UnitTesting
             string output;
 
             output = test.ToString();
+            result = output.Length;
 
-            Assert.AreEqual(expectedLength, output.Length);
+            Assert.AreEqual(expectedLength, result);
         }
         [TestMethod]
         public void ToString_ArrayHasMultipleValues_ReturnsStringContainingComma()
@@ -298,6 +300,91 @@ namespace CustomList_UnitTesting
             {
                 result = false;
             }
+
+            Assert.AreEqual(expectedResult, result);
+        }
+        [TestMethod]
+        public void PlusOperator_TwoCustomListsBothWithValues_ReturnsCombinedCustomList()
+        {
+            int[] valsOne = new int[3] { 0, 1, 2 };
+            int[] valsTwo = new int[3] { 3, 4, 5 };
+            int[] expectedVals = new int[6] { 0, 1, 2, 3, 4, 5 };
+            CustomList<int> testOne = new CustomList<int>(valsOne);
+            CustomList<int> testTwo = new CustomList<int>(valsTwo);
+            CustomList<int> result;
+            CustomList<int> expectedResult = new CustomList<int>(expectedVals);
+
+            result = testOne + testTwo;
+
+            Assert.AreEqual(expectedResult, result);
+        }
+        [TestMethod]
+        public void PlusOperator_TwoCustomListsBothWithValues_CountIncrements()
+        {
+            int[] valsOne = new int[3] { 0, 1, 2 };
+            int[] valsTwo = new int[3] { 3, 4, 5 };
+            CustomList<int> testOne = new CustomList<int>(valsOne);
+            CustomList<int> testTwo = new CustomList<int>(valsTwo);
+            CustomList<int> resultList;
+            int result;
+            int expectedResult = 6;
+
+            resultList = testOne + testTwo;
+            result = resultList.Count;
+
+            Assert.AreEqual(expectedResult, result);
+        }
+        [TestMethod]
+        public void PlusOperator_TwoCustomListsOneWithValues_ReturnsCombinedCustomList()
+        {
+            int[] valsOne = new int[3] { 0, 1, 2 };
+            CustomList<int> testOne = new CustomList<int>(valsOne);
+            CustomList<int> testTwo = new CustomList<int>();
+            CustomList<int> result;
+            CustomList<int> expectedResult = testOne;
+
+            result = testOne + testTwo;
+
+            Assert.AreEqual(expectedResult, result);
+        }
+        [TestMethod]
+        public void PlusOperator_TwoCustomListsOneWithValues_CountIncrements()
+        {
+            int[] valsOne = new int[3] { 0, 1, 2 };
+            CustomList<int> testOne = new CustomList<int>(valsOne);
+            CustomList<int> testTwo = new CustomList<int>();
+            CustomList<int> resultList;
+            int result;
+            int expectedResult = 3;
+
+            resultList = testOne + testTwo;
+            result = resultList.Count;
+
+            Assert.AreEqual(expectedResult, result);
+        }
+        [TestMethod]
+        public void PlusOperator_TwoCustomListsNeitherWithValues_ReturnsCombinedCustomList()
+        {
+            CustomList<int> testOne = new CustomList<int>();
+            CustomList<int> testTwo = new CustomList<int>();
+            CustomList<int> result;
+            CustomList<int> expectedResult = testOne;
+
+            result = testOne + testTwo;
+
+            Assert.AreEqual(expectedResult, result);
+        }
+        [TestMethod]
+        public void PlusOperator_TwoCustomListsNeitherWithValues_CountIncrements()
+        {
+            CustomList<int> testOne = new CustomList<int>();
+            CustomList<int> testTwo = new CustomList<int>();
+            CustomList<int> resultList;
+            int result;
+            int expectedResult = 0;
+
+            resultList = testOne + testTwo;
+            result = resultList.Count;
 
             Assert.AreEqual(expectedResult, result);
         }

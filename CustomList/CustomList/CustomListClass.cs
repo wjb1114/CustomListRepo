@@ -86,6 +86,20 @@ namespace CustomList
             }
         }
 
+        public override string ToString()
+        {
+            string listStringOutput = "";
+            for (int i = 0; i < Count; i++)
+            {
+                if (listStringOutput.Length > 0)
+                {
+                    listStringOutput += ", ";
+                }
+                listStringOutput += vals[i];
+            }
+            return listStringOutput;
+        }
+
         private void UpdateArrayLength(int length)
         {
             T[] oldVals = new T[Capacity];
