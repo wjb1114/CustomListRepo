@@ -184,13 +184,12 @@ namespace CustomList_UnitTesting
         [TestMethod]
         public void Remove_ArrayHasNoValues_IndexesDoNotMove()
         {
-            int[] initVals = new int[4] { 0, 1, 2, 3 };
-            CustomList<int> test = new CustomList<int>(initVals);
-            int expected = 2;
+            CustomList<int> test = new CustomList<int>();
+            int expected = 0;
             int actual;
 
             test.Remove(2);
-            actual = test[2];
+            actual = test.Count;
 
             Assert.AreEqual(expected, actual);
         }
@@ -228,6 +227,79 @@ namespace CustomList_UnitTesting
             actual = test.Remove(4);
 
             Assert.AreEqual(expected, actual);
+        }
+        [TestMethod]
+        public void ToString_ArrayHasValues_ReturnsStringWithLengthMoreThanZero()
+        {
+            CustomList<int> test = new CustomList<int>();
+            int result;
+            int minLength = 1;
+            string output;
+
+            test.Add(0);
+
+            output = test.ToString();
+
+            Assert.IsTrue(output.Length >= minLength);
+        }
+        [TestMethod]
+        public void ToString_ArrayHasNoValues_ReturnsStringWithLengthZero()
+        {
+            CustomList<int> test = new CustomList<int>();
+            int result;
+            int expectedLength = 0;
+            string output;
+
+            output = test.ToString();
+
+            Assert.AreEqual(expectedLength, output.Length);
+        }
+        [TestMethod]
+        public void ToString_ArrayHasMultipleValues_ReturnsStringContainingComma()
+        {
+            CustomList<int> test = new CustomList<int>();
+            bool result;
+            bool expectedResult = true;
+            string output;
+
+            test.Add(0);
+            test.Add(1);
+
+            output = test.ToString();
+
+            if (output.Contains(", "))
+            {
+                result = true;
+            }
+            else
+            {
+                result = false;
+            }
+
+            Assert.AreEqual(expectedResult, result);
+        }
+        [TestMethod]
+        public void ToString_ArrayHasSingleValues_ReturnsStringWithoutComma()
+        {
+            CustomList<int> test = new CustomList<int>();
+            bool result;
+            bool expectedResult = false;
+            string output;
+
+            test.Add(0);
+
+            output = test.ToString();
+
+            if (output.Contains(", "))
+            {
+                result = true;
+            }
+            else
+            {
+                result = false;
+            }
+
+            Assert.AreEqual(expectedResult, result);
         }
     }
 }

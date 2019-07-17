@@ -46,12 +46,12 @@ namespace CustomList
         }
         public CustomList(T[] initialValues)
         {
-            vals = new T[initialValues.Length];
-            for (int i = 0; i < vals.Length; i++)
-            {
-                vals[i] = initialValues[i];
-            }
+            vals = new T[4];
             Count = 0;
+            for (int i = 0; i < initialValues.Length; i++)
+            {
+                Add(initialValues[i]);
+            }
         }
 
 
@@ -65,15 +65,54 @@ namespace CustomList
             Count++;
         }
 
+        public bool Remove(T item)
+        {
+            if (Count == 0)
+            {
+                return false;
+            }
+            else
+            {
+                for (int i = 0; i < Count; i++)
+                {
+                    if (EqualityComparer<T>.Default.Equals(vals[i], item))
+                    {
+                        RemoveItemAtIndex(i);
+                        Count--;
+                        return true;
+                    }
+                }
+                return false;
+            }
+        }
+
         private void UpdateArrayLength(int length)
         {
-            T[] oldVals = new T[vals.Length];
-            for (int i = 0; i < vals.Length; i++)
+            T[] oldVals = new T[Capacity];
+            for (int i = 0; i < Capacity; i++)
             {
                 oldVals[i] = vals[i];
             }
             vals = new T[length];
             for (int i = 0; i < oldVals.Length; i++)
+            {
+                vals[i] = oldVals[i];
+            }
+        }
+
+        private void RemoveItemAtIndex(int index)
+        {
+            T[] oldVals = new T[Capacity];
+            for (int i = 0; i < index; i++)
+            {
+                oldVals[i] = vals[i]; 
+            }
+            for (int i = (index + 1); i < Count; i++)
+            {
+                oldVals[i - 1] = vals[i];
+            }
+            vals = new T[Capacity];
+            for (int i = 0; i < Count; i++)
             {
                 vals[i] = oldVals[i];
             }
