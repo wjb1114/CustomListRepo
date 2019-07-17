@@ -44,6 +44,16 @@ namespace CustomList
             vals = new T[4];
             Count = 0;
         }
+        public CustomList(T[] initialValues)
+        {
+            vals = new T[initialValues.Length];
+            for (int i = 0; i < vals.Length; i++)
+            {
+                vals[i] = initialValues[i];
+            }
+            Count = 0;
+        }
+
 
         public void Add(T item)
         {

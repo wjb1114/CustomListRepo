@@ -142,5 +142,92 @@ namespace CustomList_UnitTesting
                 Assert.AreEqual("Index out of range.", e.Message);
             }
         }
+        [TestMethod]
+        public void Remove_ArrayHasValues_CountDecrements()
+        {
+            int[] initVals = new int[4] {0, 1, 2, 3};
+            CustomList<int> test = new CustomList<int>(initVals);
+            int expected = 3;
+            int actual;
+
+            test.Remove(2);
+            actual = test.Count;
+
+            Assert.AreEqual(expected, actual);
+        }
+        [TestMethod]
+        public void Remove_ArrayHasValues_IndexesMove()
+        {
+            int[] initVals = new int[4] { 0, 1, 2, 3 };
+            CustomList<int> test = new CustomList<int>(initVals);
+            int expected = 3;
+            int actual;
+
+            test.Remove(2);
+            actual = test[2];
+
+            Assert.AreEqual(expected, actual);
+        }
+        [TestMethod]
+        public void Remove_ArrayHasNoValues_CountDoesNotDecrement()
+        {
+            int[] initVals = new int[4] { 0, 1, 2, 3 };
+            CustomList<int> test = new CustomList<int>(initVals);
+            int expected = 4;
+            int actual;
+
+            test.Remove(4);
+            actual = test.Count;
+
+            Assert.AreEqual(expected, actual);
+        }
+        [TestMethod]
+        public void Remove_ArrayHasNoValues_IndexesDoNotMove()
+        {
+            int[] initVals = new int[4] { 0, 1, 2, 3 };
+            CustomList<int> test = new CustomList<int>(initVals);
+            int expected = 2;
+            int actual;
+
+            test.Remove(2);
+            actual = test[2];
+
+            Assert.AreEqual(expected, actual);
+        }
+        [TestMethod]
+        public void Remove_ArrayHasNoValues_ReturnsFalse()
+        {
+            CustomList<int> test = new CustomList<int>();
+            bool expected = false;
+            bool actual;
+
+            actual = test.Remove(2);
+
+            Assert.AreEqual(expected, actual);
+        }
+        [TestMethod]
+        public void Remove_ArrayHasValues_ReturnsTrueIfValueFound()
+        {
+            int[] initVals = new int[4] { 0, 1, 2, 3 };
+            CustomList<int> test = new CustomList<int>(initVals);
+            bool expected = true;
+            bool actual;
+
+            actual = test.Remove(2);
+
+            Assert.AreEqual(expected, actual);
+        }
+        [TestMethod]
+        public void Remove_ArrayHasValues_ReturnsFalseIfValueNotFound()
+        {
+            int[] initVals = new int[4] { 0, 1, 2, 3 };
+            CustomList<int> test = new CustomList<int>(initVals);
+            bool expected = false;
+            bool actual;
+
+            actual = test.Remove(4);
+
+            Assert.AreEqual(expected, actual);
+        }
     }
 }
