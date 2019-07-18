@@ -114,6 +114,40 @@ namespace CustomList
             return listStringOutput;
         }
 
+        public void Zip(CustomList<T> secondList)
+        {
+            if (Count <= 0 || secondList.Count <= 0)
+            {
+                return;
+            }
+            else
+            {
+                T[] oldVals = new T[Count];
+                for (int i = 0; i < Count; i++)
+                {
+                    oldVals[i] = vals[i];
+                }
+                int maxLength;
+                if (oldVals.Length > secondList.Count)
+                {
+                    maxLength = secondList.Count;
+                }
+                else
+                {
+                    maxLength = oldVals.Length;
+                }
+                while(Count > 0)
+                {
+                    Remove(vals[0]);
+                }
+                for (int i = 0; i < maxLength; i++)
+                {
+                    Add(oldVals[i]);
+                    Add(secondList[i]);
+                }
+            }
+        }
+
         public static CustomList<T> operator+ (CustomList<T> listOne, CustomList<T> listTwo)
         {
             CustomList<T> resultList = new CustomList<T>();

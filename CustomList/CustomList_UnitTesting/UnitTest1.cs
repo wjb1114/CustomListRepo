@@ -706,5 +706,119 @@ namespace CustomList_UnitTesting
 
             Assert.AreEqual(expected, output);
         }
+        [TestMethod]
+        public void Zip_EqualSizesNotEmpty_CorrectOutput()
+        {
+            CustomList<int> listOne = new CustomList<int>() { 0, 2, 4 };
+            CustomList<int> listTwo = new CustomList<int>() { 1, 3, 5 };
+            CustomList<int> expectedResult = new CustomList<int> { 0, 1, 2, 3, 4, 5 };
+
+            listOne.Zip(listTwo);
+
+            bool match = true;
+
+            if (listOne.Count != expectedResult.Count)
+            {
+                Assert.Fail("Lists of different lengths.");
+            }
+            else
+            {
+                for (int i = 0; i < listOne.Count; i++)
+                {
+                    if (listOne[i] != expectedResult[i])
+                    {
+                        match = false;
+                    }
+                }
+                Assert.IsTrue(match);
+            }
+        }
+        [TestMethod]
+        public void Zip_EqualSizesNotEmpty_CurrectCount()
+        {
+            CustomList<int> listOne = new CustomList<int>() { 0, 2, 4 };
+            CustomList<int> listTwo = new CustomList<int>() { 1, 3, 5 };
+            CustomList<int> expectedResult = new CustomList<int> { 0, 1, 2, 3, 4, 5 };
+
+            listOne.Zip(listTwo);
+
+            Assert.AreEqual(expectedResult.Count, listOne.Count);
+        }
+        [TestMethod]
+        public void Zip_NotEqualSizesNotEmpty_CorrectOutput()
+        {
+            CustomList<int> listOne = new CustomList<int>() { 0, 2 };
+            CustomList<int> listTwo = new CustomList<int>() { 1, 3, 5 };
+            CustomList<int> expectedResult = new CustomList<int> { 0, 1, 2, 3 };
+
+            listOne.Zip(listTwo);
+
+            bool match = true;
+
+            if (listOne.Count != expectedResult.Count)
+            {
+                Assert.Fail("Lists of different lengths.");
+            }
+            else
+            {
+                for (int i = 0; i < listOne.Count; i++)
+                {
+                    if (listOne[i] != expectedResult[i])
+                    {
+                        match = false;
+                    }
+                }
+                Assert.IsTrue(match);
+            }
+        }
+        [TestMethod]
+        public void Zip_NotEqualSizesNotEmpty_CurrectCount()
+        {
+            CustomList<int> listOne = new CustomList<int>() { 0, 2 };
+            CustomList<int> listTwo = new CustomList<int>() { 1, 3, 5 };
+            CustomList<int> expectedResult = new CustomList<int> { 0, 1, 2, 3 };
+
+            listOne.Zip(listTwo);
+
+            Assert.AreEqual(expectedResult.Count, listOne.Count);
+        }
+        [TestMethod]
+        public void Zip_EmptyList_CorrectOutput()
+        {
+            CustomList<int> listOne = new CustomList<int>();
+            CustomList<int> listTwo = new CustomList<int>() { 1, 3, 5 };
+            CustomList<int> expectedResult = new CustomList<int> ();
+
+            listOne.Zip(listTwo);
+
+            bool match = true;
+
+            if (listOne.Count != expectedResult.Count)
+            {
+                Assert.Fail("Lists of different lengths.");
+            }
+            else
+            {
+                for (int i = 0; i < listOne.Count; i++)
+                {
+                    if (listOne[i] != expectedResult[i])
+                    {
+                        match = false;
+                    }
+                }
+                Assert.IsTrue(match);
+            }
+        }
+        [TestMethod]
+        public void Zip_EmptyList_CurrectCount()
+        {
+            CustomList<int> listOne = new CustomList<int>();
+            CustomList<int> listTwo = new CustomList<int>() { 1, 3, 5 };
+            CustomList<int> expectedResult = new CustomList<int>();
+
+            listOne.Zip(listTwo);
+
+            Assert.AreEqual(expectedResult.Count, listOne.Count);
+        }
     }
 }
