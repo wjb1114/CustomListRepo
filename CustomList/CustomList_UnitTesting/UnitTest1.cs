@@ -474,7 +474,7 @@ namespace CustomList_UnitTesting
             CustomList<int> testTwo = new CustomList<int>(valsTwo);
             CustomList<int> resultList;
             int result;
-            int expectedResult = 6;
+            int expectedResult = 2;
 
             resultList = testOne - testTwo;
             result = resultList.Count;
@@ -520,7 +520,7 @@ namespace CustomList_UnitTesting
             CustomList<int> testTwo = new CustomList<int>(valsTwo);
             CustomList<int> resultList;
             int result;
-            int expectedResult = 6;
+            int expectedResult = 3;
 
             resultList = testOne - testTwo;
             result = resultList.Count;
@@ -580,7 +580,7 @@ namespace CustomList_UnitTesting
             CustomList<int> expectedResult = testOne;
             bool resultBool = true;
 
-            result = testOne + testTwo;
+            result = testOne - testTwo;
 
             if (result.Count != expectedResult.Count)
             {
@@ -608,10 +608,57 @@ namespace CustomList_UnitTesting
             int result;
             int expectedResult = 0;
 
-            resultList = testOne + testTwo;
+            resultList = testOne - testTwo;
             result = resultList.Count;
 
             Assert.AreEqual(expectedResult, result);
+        }
+        [TestMethod]
+        public void MinusOperator_TwoCustomListsBothWithValuesMultiples_CountDoesDecrements()
+        {
+            int[] valsOne = new int[3] { 1, 1, 1 };
+            int[] valsTwo = new int[3] { 1, 2, 3 };
+            CustomList<int> testOne = new CustomList<int>(valsOne);
+            CustomList<int> testTwo = new CustomList<int>(valsTwo);
+            CustomList<int> resultList;
+            int result;
+            int expectedResult = 2;
+
+            resultList = testOne - testTwo;
+            result = resultList.Count;
+
+            Assert.AreEqual(expectedResult, result);
+        }
+        [TestMethod]
+        public void MinusOperator_TwoCustomListsBothWithValues_ReturnsModifiedList()
+        {
+            int[] valsOne = new int[3] { 1, 1, 1 };
+            int[] valsTwo = new int[3] { 1, 2, 3 };
+            int[] expectedVals = new int[2] { 1, 1 };
+            CustomList<int> testOne = new CustomList<int>(valsOne);
+            CustomList<int> testTwo = new CustomList<int>(valsTwo);
+            CustomList<int> result;
+            CustomList<int> expectedResult = new CustomList<int>(expectedVals);
+            bool resultBool = true;
+
+            result = testOne - testTwo;
+
+            if (result.Count != expectedResult.Count)
+            {
+                Assert.Fail("CustomList objects are of inequal length.");
+            }
+            else
+            {
+                for (int i = 0; i < result.Count; i++)
+                {
+                    if (result[i] != expectedResult[i])
+                    {
+                        resultBool = false;
+                        break;
+                    }
+                }
+                Assert.IsTrue(resultBool);
+            }
         }
     }
 }
