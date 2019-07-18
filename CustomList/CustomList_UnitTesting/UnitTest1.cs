@@ -660,5 +660,51 @@ namespace CustomList_UnitTesting
                 Assert.IsTrue(resultBool);
             }
         }
+        [TestMethod]
+        public void Iteration_ListWithMultipleValues_CorrectOutput()
+        {
+            CustomList<int> test = new CustomList<int>();
+            test.Add(0);
+            test.Add(1);
+            test.Add(2);
+            string output = "";
+            string expected = "012";
+
+            foreach(int i in test)
+            {
+                output += i;
+            }
+
+            Assert.AreEqual(expected, output);
+        }
+        [TestMethod]
+        public void Iteration_ListWithSingleValue_CorrectOutput()
+        {
+            CustomList<int> test = new CustomList<int>();
+            test.Add(0);
+            string output = "";
+            string expected = "0";
+
+            foreach (int i in test)
+            {
+                output += i;
+            }
+
+            Assert.AreEqual(expected, output);
+        }
+        [TestMethod]
+        public void Iteration_ListWithNoValues_CorrectOutput()
+        {
+            CustomList<int> test = new CustomList<int>();
+            string output = "";
+            string expected = "";
+
+            foreach (int i in test)
+            {
+                output += i;
+            }
+
+            Assert.AreEqual(expected, output);
+        }
     }
 }

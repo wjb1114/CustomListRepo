@@ -3,10 +3,11 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Collections;
 
 namespace CustomList
 {
-    public class CustomList<T>
+    public class CustomList<T> : IEnumerable<T>
     {
         private T[] vals;
 
@@ -18,6 +19,20 @@ namespace CustomList
             {
                 return vals.Length;
             }
+        }
+
+        public IEnumerator<T> GetEnumerator()
+        {
+            for (int i = 0; i < Count; i++)
+            {
+                yield return vals[i];
+            }
+        }
+
+        IEnumerator IEnumerable.GetEnumerator()
+        {
+            // call the generic version of the method
+            return GetEnumerator();
         }
 
         public T this[int indexer]
