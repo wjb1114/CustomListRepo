@@ -1,8 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Collections;
 
 namespace CustomList
@@ -147,7 +144,7 @@ namespace CustomList
                 }
             }
         }
-        // Sort method using buble sort, compared using HashCodes
+        // Sort method using bubble sort, compared using HashCodes
         public void Sort<T>() where T : IComparable<T>
         {
             bool fullPass = false;
@@ -238,11 +235,5 @@ namespace CustomList
                 vals[i] = oldVals[i];
             }
         }
-        /*
-public int CompareTo(T other)
-{
-   throw new NotImplementedException();
-}
-*/
     }
 }
