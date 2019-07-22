@@ -820,5 +820,79 @@ namespace CustomList_UnitTesting
 
             Assert.AreEqual(expectedResult.Count, listOne.Count);
         }
+        [TestMethod]
+        public void Sort_PopulatedList_CorrectOrder()
+        {
+            CustomList<int> test = new CustomList<int>() { 0, 3, 1, 2 };
+            CustomList<int> expected = new CustomList<int>() { 0, 1, 2, 3 };
+
+            test.Sort<int>();
+
+            bool match = true;
+
+            if (test.Count != expected.Count)
+            {
+                Assert.Fail("Lists of different lengths.");
+            }
+            else
+            {
+                for (int i = 0; i < test.Count; i++)
+                {
+                    if (test[i] != expected[i])
+                    {
+                        match = false;
+                        break;
+                    }
+                }
+                Assert.IsTrue(match);
+            }
+        }
+        [TestMethod]
+        public void Sort_LargePopulatedList_CorrectOrder()
+        {
+            CustomList<int> test = new CustomList<int>() { 8, 0, 7, 1, 6, 2, 5, 3, 4 };
+            CustomList<int> expected = new CustomList<int>() { 0, 1, 2, 3, 4, 5, 6, 7, 8 };
+
+            test.Sort<int>();
+
+            bool match = true;
+
+            if (test.Count != expected.Count)
+            {
+                Assert.Fail("Lists of different lengths.");
+            }
+            else
+            {
+                for (int i = 0; i < test.Count; i++)
+                {
+                    if (test[i] != expected[i])
+                    {
+                        match = false;
+                        break;
+                    }
+                }
+                Assert.IsTrue(match);
+            }
+        }
+        [TestMethod]
+        public void Sort_PopulatedList_CorrectCount()
+        {
+            CustomList<int> test = new CustomList<int>() { 0, 3, 1, 2 };
+            CustomList<int> expected = new CustomList<int>() { 0, 1, 2, 3 };
+
+            test.Sort<int>();
+
+            Assert.AreEqual(expected.Count, test.Count);
+        }
+        [TestMethod]
+        public void Sort_UnpopulatedList_CorrectCount()
+        {
+            CustomList<int> test = new CustomList<int>();
+            CustomList<int> expected = new CustomList<int>();
+
+            test.Sort<int>();
+
+            Assert.AreEqual(expected.Count, test.Count);
+        }
     }
 }

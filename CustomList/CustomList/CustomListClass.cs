@@ -147,7 +147,30 @@ namespace CustomList
                 }
             }
         }
+        // Sort method using buble sort, compared using HashCodes
+        public void Sort<T>() where T : IComparable<T>
+        {
+            bool fullPass = false;
+            while (fullPass == false)
+            {
+                fullPass = true;
+                for (int i = 0; i < (Count - 1); i++)
+                {
+                    if (vals[i].GetHashCode() > vals[i + 1].GetHashCode())
+                    {
+                        fullPass = false;
+                        Swap(i, i + 1);
+                    }
+                }
+            }
+        }
 
+        private void Swap(int firstIndex, int secondIndex)
+        {
+            T middleVal = vals[firstIndex];
+            vals[firstIndex] = vals[secondIndex];
+            vals[secondIndex] = middleVal;
+        }
         public static CustomList<T> operator+ (CustomList<T> listOne, CustomList<T> listTwo)
         {
             CustomList<T> resultList = new CustomList<T>();
@@ -215,5 +238,11 @@ namespace CustomList
                 vals[i] = oldVals[i];
             }
         }
+        /*
+public int CompareTo(T other)
+{
+   throw new NotImplementedException();
+}
+*/
     }
 }
